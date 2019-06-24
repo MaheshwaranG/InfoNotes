@@ -1,0 +1,1 @@
+var fs=require("fs"),path=require("path");exports.getUserTable=function(){var e,r="./database",s=path.resolve(r);s=path.join(s,"UserLoginDto.json"),fs.existsSync(s)||fs.writeFileSync(s,"{}");var t=fs.readFileSync(s,"utf8");return e=JSON.parse(t)},exports.writeUserTable=function(e,r){fs.writeFileSync(e,JSON.stringify(r))};

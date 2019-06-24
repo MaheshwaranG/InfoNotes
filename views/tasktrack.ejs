@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" >
+  <link href="./css/taskTrack.css" type="text/css" rel="stylesheet" />
+  <link href="./css/common.css" type="text/css" rel="stylesheet" />
+   <!--<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script> -->
+   <script src="./js/tracktask.js" type="text/javascript"></script>
+   <script src="./js/common.js" type="text/javascript"></script>
+   <title>Task Track</title>
+</head>
+<body>
+<button id="new-add-task" class="mg-float-button" title="Add" onclick="addTask(event)">+</button>
+
+
+
+<div class="mg-navbar">
+  <a href="home">Home</a>
+  <!-- <a href="share">Share(NM)</a> -->
+  <a href="taskTrack">Task Follow</a>
+  <!-- <a href="videoformatter">VideoEditor</a> -->
+  <input type="text" placeholder="Search.." disabled />
+  <span class="popup1" onclick="userProfilePopup()">
+  <img src=<%= "http://cortex.infoview/ge-issue-list-front/img/"+user+".JPG" %> alt="Avatar" class="mg-avatar" id="mgAvatar" title=<%= user %> >
+  </span>
+</div>
+
+<span class="popup" id="navProfilePopup">
+  <div class="popuptext" id="myPopup"> 
+    <div>
+       
+    <div> <img src=<%= "http://cortex.infoview/ge-issue-list-front/img/"+user+".JPG" %> alt="Avatar" class="nav-expand-profile-pictue" id="mgAvatar" > </div>
+    
+    </div>
+    <div class="nav-profile-normal-label" id="nav-profile-label"> <%= user %> </div>
+    <div class="nav-profile-label" id="nav-profile-label"> <a href="profile" class="nav-profile-label" >Profile</a> </div>
+    <div class="nav-profile-label" id="nav-profile-label">  <a href="logout" class="nav-profile-label">Logout</a> </div>
+  </div>
+
+</span>
+
+
+<div class="mg-main" id="mgMain">
+ <div class="mg-row" id="mgRow">
+
+<% Object.keys(data).forEach(function(key){ %>
+<div class="mg-column" id=<%= "mgColumn-"+key %> data-taskId = <%= key%>>
+<div class="mg-table-div" >
+<table>
+  <tr>
+    <th colspan="1">Name</th>
+    <th colspan="2"><%= data[key]['name'] %></th>
+  </tr>
+  <tr>
+    <th colspan="1">CH_Member</th>
+    <th colspan="2"> <%= data[key]['chMember'] %> </th>
+  </tr>
+  <tr>
+    <th colspan="1">Story_Id</th>
+    <th colspan="2"><%= data[key]['storyId'] %></th>
+  </tr>
+  <tr>
+    <th colspan="1">CH Start Date</th>
+    <th colspan="2" ><%= data[key]['chStartDate'] %></th>
+  </tr>
+  <tr>
+    <th colspan="1">CH End Date</th>
+    <th colspan="2"><%= data[key]['chEndDate'] %></th>
+  </tr>
+  <tr>
+    <th>Steps</th>
+    <th class='mg-tabletxt-small-th'>Process</th>
+    <th class='mg-tabletxt-small-th'>From</th>
+    <th class='mg-tabletxt-small-th'>To</th>
+    <th class='mg-tabletxt-large-th'>Comments</th>
+  </tr>
+  <tr>
+    <td rowspan="2">Step 1</td>
+    <td>Analysis</td>
+    <td><%= data[key]['analysisStartDate'] %></td>
+    <td><%= data[key]['analysisEndDate'] %></td>
+    <td><div class="mg-table-textarea-div"><%= data[key]['analysisMemComments'] %></div></td>
+  </tr>
+   <tr>
+    <td>CH LL Review</td>
+    <td><%= data[key]['analysisLLRStartDate'] %></td>
+    <td><%= data[key]['analysisLLREndDate'] %></td>
+    <td><div class="mg-table-textarea-div"><%= data[key]['analysisLLRComments'] %></div></td>
+  </tr>
+  <tr>
+    <td rowspan="2">Step 2</td>
+    <td>Given to QC</td>
+    <td><%= data[key]['analysisQCStartDate'] %></td>
+    <td><%= data[key]['analysisQCEndDate'] %></td>
+    <td><div class="mg-table-textarea-div"><%= data[key]['analysisQCComments'] %></div></td>
+  </tr>
+  <tr></tr>
+   <tr>
+    <td rowspan="2">Step 3</td>
+    <td>CH Execution</td>
+    <td><%= data[key]['postChStartDate'] %></td>
+    <td><%= data[key]['postChEndDate'] %></td>
+    <td><div class="mg-table-textarea-div"><%= data[key]['postChComments'] %></div></td>
+  </tr>
+   <tr>
+    <td>CH LL Review</td>
+    <td><%= data[key]['postChLLRStartDate'] %></td>
+    <td><%= data[key]['postChLLREndDate'] %></td>
+    <td><div class="mg-table-textarea-div"><%= data[key]['postChLLRComments'] %></div></td>
+  </tr>
+  <tr>
+    <td rowspan="2">Step 4</td>
+    <td>Retesting &
+  Regression</td>
+    <td><%= data[key]['RRTEtartDate'] %></td>
+    <td><%= data[key]['RRTEndDate'] %></td>
+    <td><div class="mg-table-textarea-div"><%= data[key]['RRTComments'] %></div></td>
+  </tr>
+   <tr>
+    <td>CH LL Review</td>
+    <td><%= data[key]['RRTLLReview'] %></td>
+    <td><%= data[key]['RRTLLEndDate'] %></td>
+    <td><div class="mg-table-textarea-div"><%= data[key]['RRTLLComments'] %></div></td>
+    </tr>
+  <tr>
+    <td>Step 5</td>
+    <td>Trunk completion</td>
+    <td><%= data[key]['finalChStartDate'] %></td>
+    <td><%= data[key]['finalChEndDate'] %></td>
+    <td><div class="mg-table-textarea-div"><%= data[key]['finalChComments'] %></div></td>
+  </tr>
+  <tr>
+    <td>Step 6</td>
+    <td>Given to QC</td>
+    <td><%= data[key]['finalQCStartDate'] %></td>
+    <td><%= data[key]['finalQCEndDate'] %></td>
+    <td><div class="mg-table-textarea-div"><%= data[key]['finalQCComments'] %></div></td>
+  </tr>
+ 
+</table>
+</div>
+<div class="mg-notes-card-footer" id="mgNotesCardFooter" contenteditable="false">
+ <span class="mg-icon-span" onclick="trackTaskView(event)"><i class="mg-small-icon-view"></i></span>
+  <span class="mg-icon-span" onclick="trackTaskEdit(event)"><i class="mg-small-icon-edit"></i></span>
+  <span class="mg-icon-span" onclick="trackTaskDelete(event)"><i class="mg-small-icon-delete"></i></span>
+</div>
+</div>
+<% });%>
+
+</div>
+</div>
+
+<!-- <button type="button" onclick="loadDoc()">Request data</button>
+<p id="demo" contenteditable="true">xxxxx</p>
+<p id="demo1" contenteditable="true"></p> -->
+
+
+ <div class="popup-box-modal" id="delete-confirm" >
+      <div class="popup-box-modal-content">
+        <div class="popup-register-container">
+          <label>  Do you Want to Delete this Task???  </label>
+          <div>
+          <button class="cancel-button" onclick="deleteTaskCancel()" autofocus > Cancel </button>
+          <button onclick="deleteTaskConfirm()"> Delete </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+ <div id="editTask" class="mg-newtask-modal">
+  <span class="mg-edittask-modal-close" title="Close Modal" onclick="closeEditForm()">&times;</span>
+  <form class="mg-edittask-modal-content" action="/updateTask" method="post">
+    <div class="container">
+      <label>FollowUp Task</label>
+      <hr>
+      <input type="hidden" id="id" name="id" value="">
+      <!-- <input type="text" name="analysisMemComments" id="analysisMemComments" size="50" maxlength="50" class='table-input-style' > -->
+ <table>
+ <colgroup>
+        <col  class="table-vsmall-col-with"/>
+        <col  class="table-small-col-with"/>
+        <col class="table-vsmall-col-with"/>
+        <col  class="table-vsmall-col-with"/>
+        <col  class="table-exlarge-col-with"/>
+      </colgroup>
+  <tr>
+    <th colspan="2">Name</th>
+    <th colspan="2">  <input type="text" name="name" id="name" size="25" maxlength="25" class='table-input-style' required>  </th>
+  </tr>
+  <tr>
+    <th colspan="2">CH_Member</th>
+    <th colspan="2"><input type="text" name="chMember" id="chMember" size="25" maxlength="25" class='table-input-style' required></th>
+  </tr>
+  <tr>
+    <th colspan="2">Story_Id</th>
+    <th colspan="2"><input type="text" name="storyId" id="storyId" size="25" maxlength="25" pattern="[0-9]*" class='table-input-style'  required></th>
+  </tr>
+  <tr>
+    <th colspan="2">CH Start Date</th>
+    <th colspan="2"><input type="date" name="chStartDate" id="chStartDate" size="25" maxlength="25" class='table-input-style' required></th>
+  </tr>
+  <tr>
+    <th colspan="2">CH End Date</th>
+    <th colspan="2"><input type="date" name="chEndDate" id="chEndDate" size="25" maxlength="25" class='table-input-style' required></th>
+  </tr>
+  <tr>
+    <th>Steps</th>
+    <th>Process</th>
+    <th class='mg-table-small-th'>From</th>
+    <th class='mg-table-small-th'>To</th>
+    <th class='mg-table-large-th'>Comments</th>
+  </tr>
+  <tr>
+    <td rowspan="2">Step 1</td>
+    <td>Screen Analysis</td>
+    <td><input type="date" name="analysisStartDate" id="analysisStartDate" class='table-input-style'></td>
+    <td><input type="date" name="analysisEndDate" id="analysisEndDate" class='table-input-style' ></td>
+    <td><textarea name="analysisMemComments" id="analysisMemComments" class="mg-table-textarea"></textarea></td>
+  </tr>
+   <tr>
+    <td>CH LL Review</td>
+    <td> <input type="date" name="analysisLLRStartDate" id="analysisLLRStartDate" class='table-input-style'> </td>
+    <td><input type="date" name="analysisLLREndDate" id="analysisLLREndDate" class='table-input-style' ></td>
+    <td>  <textarea name="analysisLLRComments" id="analysisLLRComments" class="mg-table-textarea"> </textarea></td>
+  </tr>
+  <tr>
+    <td rowspan="2">Step 2</td>
+    <td>Given to QC</td>
+    <td > <input type="date" name="analysisQCStartDate" id="analysisQCStartDate" class='table-input-style' > </td>
+    <td><input type="date" name="analysisQCEndDate" id="analysisQCEndDate" class='table-input-style' ></td>
+    <td><textarea name="analysisQCComments" id="analysisQCComments" class="mg-table-textarea"></textarea></td>
+  </tr>
+  <tr></tr>
+   <tr>
+    <td rowspan="2">Step 3</td>
+    <td>CH Execution</td>
+    <td><input type="date" name="postChStartDate" id="postChStartDate" class='table-input-style'></td>
+    <td><input type="date" name="postChEndDate" id="postChEndDate" class='table-input-style'></td>
+    <td> <textarea name="postChComments" id="postChComments" class="mg-table-textarea"></textarea></td>
+  </tr>
+   <tr>
+    <td>CH LL Review</td>
+    <td ><input type="date" name="postChLLRStartDate" id="postChLLRStartDate" class='table-input-style' >  </td>
+    <td><input type="date" name="postChLLREndDate" id="postChLLREndDate" class='table-input-style'></td>
+    <td><textarea name="postChLLRComments" id="postChLLRComments" class="mg-table-textarea"></textarea></td>
+  </tr>
+  <tr>
+    <td rowspan="2">Step 4</td>
+    <td>Retesting &
+  Regression</td>
+    <td><input type="date" name="RRTEtartDate" id="RRTEtartDate" class='table-input-style'></td>
+    <td><input type="date" name="RRTEndDate" id="RRTEndDate" class='table-input-style'></td>
+    <td> <textarea name="RRTComments" id="RRTComments" class="mg-table-textarea"></textarea></td>
+  </tr>
+  <tr>
+    <td>CH LL Review</td>
+    <td> <input type="date" name="RRTLLReview" id="RRTLLReview" class='table-input-style' >  </td>
+    <td><input type="date" name="RRTLLEndDate" id="RRTLLEndDate" class='table-input-style' ></td>
+    <td><textarea name="RRTLLComments" id="RRTLLComments" class="mg-table-textarea"></textarea></td>
+  </tr>
+  <tr>
+    <td>Step 5</td>
+    <td>Trunk completion</td>
+    <td>  <input type="date" name="finalChStartDate" id="finalChStartDate" class='table-input-style'>  </td>
+    <td><input type="date" name="finalChEndDate" id="finalChEndDate" class='table-input-style'></td>
+    <td><textarea name="finalChComments" id="finalChComments" class="mg-table-textarea"></textarea></td>
+  </tr>
+  <tr>
+    <td>Step 6</td>
+    <td>Given to QC</td>
+    <td ><input type="date" name="finalQCStartDate" id="finalQCStartDate" class='table-input-style' >   </td>
+    <td><input type="date" name="finalQCEndDate" id="finalQCEndDate" class='table-input-style'></td>
+    <td><textarea name="finalQCComments" id="finalQCComments" class="mg-table-textarea"></textarea></td>
+  </tr>
+ 
+</table>
+     
+     <!--  <label>
+        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+      </label> -->
+
+     <!--  <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p> -->
+     <div class="operation-button-layout-outer">
+      <div class="operation-button-layout-inner"><button type="button" onclick="closeEditForm()" class="mg-newtask-modal-cancelbtn">Cancel</button></div>
+      <div class="operation-button-layout-inner"><button type="submit" class="mg-newtask-modal-signup" >Update</button></div>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+
+<div id="ViewTask" class="mg-newtask-modal">
+  <span class="mg-edittask-modal-close" title="Close Modal" onclick="closeViewForm()">&times;</span>
+  <form class="mg-viewtask-modal-content" action="/ViewTask" method="post">
+    <div class="container">
+      <label>View Task</label>
+      <hr>
+     
+      <!-- <input type="text" name="analysisMemComments" id="analysisMemComments" size="50" maxlength="50" class='table-input-style' > -->
+ <table>
+ <colgroup>
+        <col  class="table-vsmall-col-with"/>
+        <col  class="table-small-col-with"/>
+        <col class="table-vsmall-col-with"/>
+        <col  class="table-vsmall-col-with"/>
+        <col  class="table-exlarge-col-with"/>
+      </colgroup>
+  <tr>
+    <th colspan="2">Name</th>
+    <th colspan="2">  <div name="name" id="div-name"> </div> </th>
+  </tr>
+  <tr>
+    <th colspan="2">CH_Member</th>
+    <th colspan="2"><div name="chMember" id="div-chMember" ></div></th>
+  </tr>
+  <tr>
+    <th colspan="2">Story_Id</th>
+    <th colspan="2"><div name="storyId" id="div-storyId" ></div></th>
+  </tr>
+  <tr>
+    <th colspan="2">CH Start Date</th>
+    <th colspan="2"><div name="chStartDate" id="div-chStartDate" ></div></th>
+  </tr>
+  <tr>
+    <th colspan="2">CH End Date</th>
+    <th colspan="2"><div name="chEndDate" id="div-chEndDate"></div></th>
+  </tr>
+  <tr>
+    <th>Steps</th>
+    <th>Process</th>
+    <th class='mg-table-small-th'>From</th>
+    <th class='mg-table-small-th'>To</th>
+    <th class='mg-table-large-th'>Comments</th>
+  </tr>
+  <tr>
+    <td rowspan="2">Step 1</td>
+    <td>Screen Analysis</td>
+    <td><div name="analysisStartDate" id="div-analysisStartDate" ></div></td>
+    <td><div name="analysisEndDate" id="div-analysisEndDate" ></div></td>
+    <td><div name="analysisMemComments" id="div-analysisMemComments" ></div></td>
+  </tr>
+   <tr>
+    <td>CH LL Review</td>
+    <td> <div name="analysisLLRStartDate" id="div-analysisLLRStartDate" ></div> </td>
+    <td><div name="analysisLLREndDate" id="div-analysisLLREndDate" ></div></td>
+    <td>  <div name="analysisLLRComments" id="div-analysisLLRComments" > </div></td>
+  </tr>
+  <tr>
+    <td rowspan="2">Step 2</td>
+    <td>Given to QC</td>
+    <td > <div name="analysisQCStartDate" id="div-analysisQCStartDate" ></div> </td>
+    <td><div name="analysisQCEndDate" id="div-analysisQCEndDate" ></div></td>
+    <td><div name="analysisQCComments" id="div-analysisQCComments" ></div></td>
+  </tr>
+  <tr></tr>
+   <tr>
+    <td rowspan="2">Step 3</td>
+    <td>Ch Execution</td>
+    <td><div name="postChStartDate" id="div-postChStartDate" ></div></td>
+    <td><div name="postChEndDate" id="div-postChEndDate" ></div></td>
+    <td> <div name="postChComments" id="div-postChComments" ></div></td>
+  </tr>
+   <tr>
+    <td>CH LL Review</td>
+    <td ><div name="postChLLRStartDate" id="div-postChLLRStartDate" ></div>  </td>
+    <td><div type="date" name="postChLLREndDate" id="div-postChLLREndDate" ></div></td>
+    <td><div name="postChLLRComments" id="div-postChLLRComments"></div></td>
+  </tr>
+  <tr>
+    <td rowspan="2">Step 4</td>
+    <td>Retesting &
+  Regression</td>
+    <td><div name="RRTEtartDate" id="div-RRTEtartDate" ></div></td>
+    <td><div  name="RRTEndDate" id="div-RRTEndDate" ></div></td>
+    <td> <div name="RRTComments" id="div-RRTComments" ></div></td>
+  </tr>
+  <tr>
+    <td>CH LL Review</td>
+    <td> <div name="RRTLLReview" id="div-RRTLLReview" > </div> </td>
+    <td><div name="RRTLLEndDate" id="div-RRTLLEndDate"  ></div></td>
+    <td><div name="RRTLLComments" id="div-RRTLLComments" ></div></td>
+  </tr>
+  <tr>
+    <td>Step 5</td>
+    <td>Trunk completion</td>
+    <td>  <div name="finalChStartDate" id="div-finalChStartDate" > </div> </td>
+    <td><div name="finalChEndDate" id="div-finalChEndDate" ></div></td>
+    <td><div name="finalChComments" id="div-finalChComments" ></div></td>
+  </tr>
+  <tr>
+    <td>Step 6</td>
+    <td>Given to QC</td>
+    <td ><div name="finalQCStartDate" id="div-finalQCStartDate"  > </div>  </td>
+    <td><div name="finalQCEndDate" id="div-finalQCEndDate" ></div></td>
+    <td><div name="finalQCComments" id="div-finalQCComments" ></div></td>
+  </tr>
+ 
+</table>
+     
+     <!--  <label>
+        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+      </label> -->
+
+     <!--  <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p> -->
+     <div class="operation-button-layout-outer">
+      <div class="operation-button-layout-inner"><button type="button" onclick="closeViewForm()" class="mg-newtask-modal-cancelbtn">Close</button></div>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  <div id="addNewTask" class="mg-newtask-modal">
+  <span class="mg-newtask-modal-close" title="Close Modal" onclick="closeCreateTaskForm()">&times;</span>
+  <form class="mg-newtask-modal-content" action="/addNewTask" method="post">
+    <div class="container">
+      <h1>FollowUp Task</h1>
+      <p>Please fill in this form to create an Track Task.</p>
+      <div class="error-text" id="signup-error-text">
+        
+      </div>
+      <div class="error-text" id="user-signup-error-text">
+        
+      </div>
+      <hr>
+ <table>
+  <tr>
+    <th colspan="2">Name</th>
+    <th colspan="2">  <input type="text" name="name" id="name" size="25" maxlength="25" class='table-input-style' required>  </th>
+  </tr>
+  <tr>
+    <th colspan="2">CH_Member</th>
+    <th colspan="2"><input type="text" name="chMember" id="ch-member" size="25" maxlength="25" class='table-input-style' required></th>
+  </tr>
+  <tr>
+    <th colspan="2">Story_Id</th>
+    <th colspan="2"><input type="text" name="storyId" id="story-id" size="25" maxlength="25" pattern="[0-9]*" class='table-input-style'  required></th>
+  </tr>
+  <tr>
+    <th colspan="2">CH Start Date</th>
+    <th colspan="2"><input type="date" name="chStartDate" id="ch-start-date" size="25" maxlength="25" class='table-input-style' required></th>
+  </tr>
+  <tr>
+    <th colspan="2">CH End Date</th>
+    <th colspan="2"><input type="date" name="chEndDate" id="ch-end-date" size="25" maxlength="25" class='table-input-style' required></th>
+  </tr>
+  <tr>
+    <th>Steps</th>
+    <th>Process</th>
+    <th class='mg-table-small-th'>From</th>
+    <th class='mg-table-small-th'>To</th>
+    <th class='mg-table-large-th'>Comments</th>
+  </tr>
+  <tr>
+    <td rowspan="2">Step 1</td>
+    <td>ScreenAnalysis+
+    Checklist_Execution
+    +Clover</td>
+    <td><input type="date" name="analysisStartDate" id="analysis-start-date" class='table-input-style'></td>
+    <td><input type="date" name="analysisEndDate" id="analysis-end-date" class='table-input-style' ></td>
+    <td><input type="text" name="analysisMemComments" id="analysis-mem-comments" size="50" maxlength="50" class='table-input-style' ></td>
+  </tr>
+   <tr>
+    <td>CH LL Review</td>
+    <td> <input type="date" name="analysisLLRStartDate" id="analysis-llr-start-date" class='table-input-style'> </td>
+    <td><input type="date" name="analysisLLREndDate" id="analysis-llr-end-date" class='table-input-style' ></td>
+    <td><input type="text" name="analysisLLRComments" id="analysis-llr-comments" size="50" maxlength="50" class='table-input-style' ></td>
+  </tr>
+  <tr>
+    <td rowspan="2">Step 2</td>
+    <td>Given to QC</td>
+    <td > <input type="date" name="analysisQCStartDate" id="analysis-qc-start-date" class='table-input-style' > </td>
+    <td><input type="date" name="analysisQCEndDate" id="analysis-qc-end-date" class='table-input-style' ></td>
+    <td><input type="text" name="analysisQCComments" id="analysis-qc-commnets" size="50" maxlength="50" class='table-input-style' ></td>
+  </tr>
+  <tr></tr>
+   <tr>
+    <td rowspan="2">Step 3</td>
+    <td>Impact_Analysis
+    Dev posted + CH posted</td>
+    <td><input type="date" name="postChStartDate" id="post-ch-start-date" class='table-input-style'></td>
+    <td><input type="date" name="postChEndDate" id="post-ch-end-date" class='table-input-style'></td>
+    <td><input type="text" name="postChComments" id="post-ch-commnets" size="50" maxlength="50" class='table-input-style'></td>
+  </tr>
+   <tr>
+    <td>CH LL Review</td>
+    <td ><input type="date" name="postChLLRStartDate" id="post-ch-llr-start-date" class='table-input-style' >  </td>
+    <td><input type="date" name="postChLLREndDate" id="post-ch-llr-end-date" class='table-input-style'></td>
+    <td><input type="text" name="postChLLRComments" id="post-ch-llr-commnets" size="50" maxlength="50" class='table-input-style' ></td>
+  </tr>
+  <tr>
+    <td rowspan="2">Step 4</td>
+    <td>Retesting &
+  Regression</td>
+    <td><input type="date" name="RRTEtartDate" id="rrt-start-date" class='table-input-style'></td>
+    <td><input type="date" name="RRTEndDate" id="rrt-end-date" class='table-input-style'></td>
+    <td><input type="text" name="RRTComments" id="rrt-commnets" size="50" maxlength="50" class='table-input-style'></td>
+  </tr>
+  <tr>
+    <td>CH LL Review</td>
+    <td> <input type="date" name="RRTLLReview" id="rrt-ll-review" class='table-input-style' >  </td>
+    <td><input type="date" name="RRTLLEndDate" id="rrt-ll-end-date" class='table-input-style' ></td>
+    <td><input type="text" name="RRTLLComments" id="rrt-ll-commnets" size="50" maxlength="50" class='table-input-style'></td>
+  </tr>
+  <tr>
+    <td>Step 5</td>
+    <td>Trunk completion</td>
+    <td>  <input type="date" name="finalChStartDate" id="final-ch-start-date" class='table-input-style'>  </td>
+    <td><input type="date" name="finalChEndDate" id="final-ch-end-date" class='table-input-style'></td>
+    <td><input type="text" name="finalChComments" id="final-ch-commnets" size="50" maxlength="50" class='table-input-style'></td>
+  </tr>
+  <tr>
+    <td>Step 6</td>
+    <td>Given to QC</td>
+    <td ><input type="date" name="finalQCStartDate" id="final-qc-start-date" class='table-input-style' >   </td>
+    <td><input type="date" name="finalQCEndDate" id="final-qc-end-date" class='table-input-style'></td>
+    <td><input type="text" name="finalQCComments" id="final-qc-commnets" size="50" maxlength="50" class='table-input-style' ></td>
+  </tr>
+ 
+</table>
+     
+     <!--  <label>
+        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+      </label> -->
+
+     <!--  <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p> -->
+      <button type="button" onclick="closeCreateTaskForm()" class="mg-newtask-modal-cancelbtn">Cancel</button>
+      <button type="submit" class="mg-newtask-modal-signup" >Create</button>
+    </div>
+  </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,248 @@
+body {margin:0;}
+
+/*Navigation bar Design */
+.mg-navbar {
+  overflow: hidden;
+  background-color: #f10768;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.mg-navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.mg-navbar a:hover {
+  background: #ddd;
+  color: black;
+}
+
+.mg-navbar input[type=text] {
+    align-items: center;
+    border: none;
+    margin-top: 11px;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 17px;
+    align-content: center;
+    padding:4px 6px;
+}
+
+
+.mg-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 20px;
+    float: right;
+    margin-top: 6px;
+    cursor: pointer;
+}
+
+
+/* Basic Design Setting*/
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  margin: 18px 0;
+  border: none;
+  cursor: pointer;
+  width: 45%;
+  opacity: 1;
+}
+
+/*button:hover {
+  opacity:1;
+}*/
+
+label{
+    font-weight: bold;
+    margin-top: 120px;
+    padding: 6px 0 6px 6px;
+}
+
+.required-input{
+  color: red;
+  padding : 0 6px 0 0;
+  cursor: default;
+}
+
+
+.mg-main {
+  margin: 12px 0 4px 0;
+  padding: 20px;
+  overflow: hidden;
+}
+
+
+/*floating Button*/
+.mg-float-button {
+  display: block;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  width:55px;
+  height:55px;
+  font-size: 25px;
+  border: none;
+  outline: none;
+  background-color: red;
+  color: white;
+  cursor: pointer;
+  z-index: 2;
+  border-radius: 50%;
+}
+
+.mg-float-button:hover {
+  background-color: #555;
+}
+
+
+
+/*User model design*/
+
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    padding :5px;
+    font-size: 18px;
+}
+
+/* The actual popup */
+.popup .popuptext {
+        visibility: hidden;
+    width: 16%;
+    background-color: #683390;
+    color: #000;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 1px;
+    position: fixed;
+    z-index: 3;
+    left: 88%;
+    top: 52px;
+    margin-left: -5%;
+    
+}
+
+/* Popup arrow */
+/*.popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 10%;
+    margin-left: -150px;
+    border-width: 15px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+*/
+
+
+.popup .popuptext::before {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid  #683390;
+    right: 18px;
+    top: -7px;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}
+
+
+.nav-expand-profile-pictue{
+  height: 100px;
+  width : 100px;
+  border-radius: 50%;
+  float: left;
+  padding:10px;
+  overflow: hidden;
+}
+.nav-profile-label{
+  padding :5px;
+  padding-top: 15px;
+  font-size: 18px;
+  background-color: #ffffff;
+}
+
+.nav-profile-normal-label{
+  padding: 6px;
+  color: #ffffff;
+}
+
+.nav-profile-label:hover{
+  padding :5px;
+  padding-top: 15px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.popup .popuptext .nav-profile-label a {
+  padding :5px;
+  padding-top: 1px;
+  font-size: 18px;
+  background-color: #ffffff;
+  color: black;
+  display: block;
+  text-decoration: none;
+}
+
+
+@media screen and (max-width: 940px) {
+    .popup .popuptext {
+        width : 130px;
+        margin-left: -52px;
+    }
+}
+
+
+/*// Column Split */
+.column {
+    float: left;
+    width: 45%;
+    padding: 8px 6px;
+    /*height: 300px;  */
+    Should be removed. Only for demonstration 
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}

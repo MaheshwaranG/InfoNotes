@@ -1,0 +1,97 @@
+.profile-info-container{
+	display: -ms-flexbox; /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap; /* IE10 */
+    flex-wrap: wrap;
+    padding: 0 4px;
+    max-width: auto;
+    justify-content: space-around;
+    padding: 0 12%;
+
+}
+.profile-image-container{
+	height: 200px;
+	width: 200px;
+	border-radius: 50%;
+}
+.profile-info-image-container{
+	align-items: center;
+}
+.profile-info-image-container-div{
+	padding: 70px 0px;
+}
+
+.profile-info-container-update{
+	justify-content: space-between;
+}
+
+
+.column input[type=text], input[type=password],input[type=email], select {
+    padding: 8px 1px;
+    margin: auto;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+    width: 100%;
+}
+
+.column input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, select:focus{
+    background-color: #ddd;
+    outline: none;
+}
+.column label{
+	align-items: right;
+}
+
+
+/* snackBar-success*/
+
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: green;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 90px;
+    font-size: 15px;
+}
+
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+
+#snackbar.error {
+    visibility: visible;
+    background-color: red;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 90px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 90px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 90px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 90px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}

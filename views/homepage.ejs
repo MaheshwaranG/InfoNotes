@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" >
+  <link href="./css/HomePageCss.css" type="text/css" rel="stylesheet" />
+  <link href="./css/common.css" type="text/css" rel="stylesheet" />
+   <!--<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script> -->
+   <script src="./js/homepageNotesUpdate.js" type="text/javascript"></script>
+   <script src="./js/common.js" type="text/javascript"></script>
+   
+   <title>Notes</title>
+</head>
+<body id='mgHtmlBody'>
+<button id="new-add-notes" class="mg-float-button" title="Add" onclick="addCard(event)">+</button>
+
+
+
+<div class="mg-navbar">
+  <a href="home">Home</a>
+  <!-- <a href="share">Share(NM)</a> -->
+  <a href="taskTrack">Task Follow</a>
+  <!-- <a href="videoformatter">VideoEditor</a> -->
+  <input type="text" placeholder="Search.."  id="notesSearch" onkeyup="notesSearch()" />
+ 
+  <span class="popup1" onclick="userProfilePopup()">
+  <img src=<%= "http://cortex.infoview/ge-issue-list-front/img/"+user+".JPG" %> alt="Avatar" class="mg-avatar" id="mgAvatar" title=<%= user %> >
+  </span>
+</div>
+
+
+<span class="popup" id="navProfilePopup">
+  <div class="popuptext" id="myPopup"> 
+    <div>
+       
+    <div> <img src=<%= "http://cortex.infoview/ge-issue-list-front/img/"+user+".JPG" %> alt="Avatar" class="nav-expand-profile-pictue" id="mgAvatar" > </div>
+    
+    </div>
+    <div class="nav-profile-normal-label" id="nav-profile-label"> <%= user %> </div>
+    <div class="nav-profile-label" id="nav-profile-label"> <a href="profile" class="nav-profile-label" >Profile</a> </div>
+    <div class="nav-profile-label" id="nav-profile-label">  <a href="logout" class="nav-profile-label">Logout</a> </div>
+  </div>
+
+</span>
+<!-- onkeyup="notesSearch()" -->
+<div class="mg-main" id="mgMain">
+ <div class="mg-row" id="mgRow">
+
+
+
+
+<% Object.keys(data).reverse().forEach(function(key){ %>
+<div class="mg-column" id="mgColumn">
+            <div class="mg-notes-card" id=<%= "mgNotesCard-"+key %>  contenteditable="true" onfocusout="notesUpdate(event)" onfocusin="notesView(event)"  onpaste="myFunction(event)" data-note-id=<%= key %>>
+            <div class="mg-notes-header"><%= data[key].header %></div>
+            <div class="mg-notes-content">
+            <% var ac =  data[key].content.split("\n");
+            for(var contentPrint=0;contentPrint <  ac.length; contentPrint++){ %>
+            <%= ac[contentPrint] %>
+            <br/>
+            <% } %>
+            </div>
+            </div>
+            <div class="mg-notes-card-footer" id="mgNotesCardFooter" contenteditable="false">
+            <span class="mg-icon-span" onclick="notesExpand(event)"><i class="mg-small-icon-expand"></i></span>
+            <span class="mg-icon-span" onclick="deletenote(event)"><i class="mg-small-icon-delete"></i></span>
+            <% for (var j = 0; j< data[key]["tag"].length; j++) { %>
+            <span class="mg-tag" ><%= data[key]["tag"][j] %></span>
+            <% } %>
+            </div>
+         </div>
+        <% });%>
+
+
+
+
+
+
+
+
+
+<!-- <% for (var i = data.length-1; i>= 0; i--) { %>
+<% var noteid = "mgNotesCard"+i; %>
+		<div class="mg-column" id="mgColumn">
+            <div class="mg-notes-card" id=<%= noteid %>  contenteditable="true" onfocusout="notesUpdate(event)" onfocusin="notesView(event)"  onpaste="myFunction(event)" data-note-id=<%= i %>>
+            <div class="mg-notes-header"><%= data[i].header %></div>
+            <div class="mg-notes-content">
+            <% var ac =  data[i].content.split("\n");
+            for(var contentPrint=0;contentPrint <  ac .length; contentPrint++){ %>
+            <%= ac[contentPrint] %>
+            <br/>
+            <% } %>
+            </div>
+            </div>
+            <div class="mg-notes-card-footer" id="mgNotesCardFooter" contenteditable="false">
+            <span class="mg-icon-span" onclick="deletenote(event)"><i class="mg-small-icon"></i></span>
+            <% for (var j = 0; j< data[i]["tag"].length; j++) { %>
+            <span class="mg-tag" ><%= data[i]["tag"][j] %></span>
+            <% } %>
+            </div>
+         </div>
+        <% } %> -->
+</div>
+</div>
+
+<!-- <button type="button" onclick="loadDoc()">Request data</button>
+<p id="demo" contenteditable="true">xxxxx</p>
+<p id="demo1" contenteditable="true"></p> -->
+
+
+ <div class="popup-box-modal" id="delete-confirm" >
+      <div class="popup-box-modal-content">
+        <div class="popup-register-container">
+          <label> Do you Want to Delete this Note??? </label>
+          <div>
+          <button class="mg-delete-cancel" onclick="deletenoteCancel()" autofocus > Cancel </button>
+          <button class="mg-delete-confirm" onclick="deletenoteConfirm()"> Delete </button>
+          </div>
+        </div>
+      </div>
+  </div>
+<!-- <div class="mg-notes-expand-background" id='notesExpandBackground'>
+</div> -->
+
+<div class="popup-box-modal-left-align" id='notesExpand'>
+  <div class="popup-box-modal-content-exlarge">
+    <span class="mg-modal-close" title="Close Modal" onclick="expandnoteCancel()">&times;</span>
+    <button class="mg-expand-notes-delete" onclick="expandNotesDelete(event)" > Delete </button>
+    <button class="mg-expand-notes-save" onclick="expandNotesSave(event)" > Save </button>
+      <div class=-"popupregister-container">
+        <div class="mg-notes-expand-header" id="mgNotesExpandHeader" contenteditable='true' >
+
+        </div>
+        <div class="mg-notes-expand-Content" id="mgNotesExpandContent" contenteditable='true' >
+
+        </div>
+      </div>
+  </div>
+</div>
+
+<!-- onpaste="checkPasteEvent(event,'mgNotesExpandHeader')" 
+onpaste="checkPasteEvent(event,'mgNotesExpandContent')"-->
+
+<div class="popup-box-modal" id="expand-delete-confirm" >
+      <div class="popup-box-modal-content">
+        <div class="popup-register-container">
+          <label> Do you Want to Delete this Note??? </label>
+          <div>
+          <button class="mg-delete-cancel" onclick="expanddeletenoteCancel()" autofocus > Cancel </button>
+          <button class="mg-delete-confirm" onclick="expanddeletenoteConfirm()"> Delete </button>
+          </div>
+        </div>
+      </div>
+  </div>
+
+ <!-- save popup -->
+
+ <!-- Close without saving Data  -->
+ <div class="popup-box-modal" id="Unsaved-data-confirm" >
+      <div class="popup-box-modal-content">
+        <span class="mg-modal-close" title="Close Modal" onclick="expandnoteUnsavedConfirmationDialogCancel()">&times;</span>
+        <div class="popup-register-container">
+          <label> Do you Want to Save unsaved Data? </label>
+          <div>
+          <button class="mg-delete-cancel" onclick="expandUnsavedDataSave()" autofocus > Yes </button>
+          <button class="mg-delete-confirm" onclick="expandUnsavedDataClose()"> No </button>
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+<div id='snackbar'> Data saved successfully </div>
+
+</body>
+</html>
