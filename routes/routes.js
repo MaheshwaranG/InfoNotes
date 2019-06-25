@@ -356,7 +356,7 @@ router.get("/profile", function(e, s) {
   }
   var t = fs.readFileSync(r, "utf8");
   var n = JSON.parse(t);
-  s.render("Profile", {
+  s.render("profile", {
     role: n.role,
     data: obj[ssn.name],
     user: ssn.name,
