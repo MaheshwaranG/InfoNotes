@@ -170,15 +170,16 @@ router.get("/taskTrack", function(e, s) {
     }
     var n = fs.readFileSync(t, "utf8");
     var o = JSON.parse(n);
+    console.log("task data  : " + n);
     if (o[ssn.name]) {
       var i = { data: o[ssn.name] };
-      s.render("taskTrack", {
+      s.render("tasktrack", {
         data: o[ssn.name],
         empId: userListDao[ssn.name]["empId"],
         user: ssn.name
       });
     } else {
-      s.render("taskTrack", {
+      s.render("tasktrack", {
         data: {},
         empId: userListDao[ssn.name]["empId"],
         user: ssn.name
@@ -355,7 +356,7 @@ router.get("/profile", function(e, s) {
   }
   var t = fs.readFileSync(r, "utf8");
   var n = JSON.parse(t);
-  s.render("profile", {
+  s.render("Profile", {
     role: n.role,
     data: obj[ssn.name],
     user: ssn.name,
