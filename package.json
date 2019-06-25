@@ -5,11 +5,15 @@
   "main": "app.js",
   "scripts": {
     "run": "node app",
-    "start": "node app"
+    "start": "node app.js"
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
     "ejs": "^2.4.1",
-    "express": "*"
+    "express": "*",
+    "express-session": "^1.16.2",
+    "ffmpeg": "0.0.4"
   },
   "author": "Maheshwran G",
   "license": "ISC"
