@@ -1,14 +1,12 @@
 {
-	"role" : {
-		"developer_cjk" : "CJK Developer",
-		"developer_hue" : "Hue Developer",
-		"tester_cjk" : "CJK Tester",
-		"tester_hue" : "HUE Tester",
-		"LL" : "Lab Leader",
-		"pmo_jun" : "Junior PMO",
-		"pmo" : "PMO",
-		"hr" : "HR",
-		"accounts" : "Accounts",
-		"management" : "Management" 
-	}
+  "role": {
+    "developer": "Developer",
+    "tester": "Tester",
+    "LL": "Lab Leader",
+    "pmo_jun": "Junior PMO",
+    "pmo": "PMO",
+    "hr": "HR",
+    "accounts": "Accounts",
+    "management": "Management"
+  }
 }
