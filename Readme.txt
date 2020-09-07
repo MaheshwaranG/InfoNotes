@@ -1,3 +1,9 @@
+Project : Notes and Simple Task Tracking App
+
+URL: https://infonotes.herokuapp.com/
+
+Tech Stack: Pure Node Js, Ejs Templates
+------------------------------------------------------------------------------
 Steps:
 ------------------------------------------------------------------------------
 1. Extract Downloaded File, Copy and Paste the InfoAssist Project folder in any where in D drive.
